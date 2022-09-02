@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
 Route::get('/users/{id}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::get('/users/{user}/comments/{id}', [CommentController::class, 'edit'])->name('comments.edit');
 Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
@@ -30,8 +31,13 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+});
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+require __DIR__.'/auth.php';
